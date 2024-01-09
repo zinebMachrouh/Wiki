@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+:root {
+    --dark-blue: #006d77ff;
+    --med-blue: #83c5beff;
+    --light-blue: #edf6f9ff;
+    --white: #fafafa;
+    --light-peach: #ffddd2ff;
+    --med-peach: #F1B9A5;
+    --dark-peach: #e29578ff;
+}
+
+.login-body {
+    background: url(../assets/bg.png) no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 70%;
+    height: 75%;
+    border-radius: 15px;
+}
+
+.left {
+    background: url(../assets/mini-bg.png) no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+    height: 100%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.left h2 {
+    letter-spacing: 1px;
+    font-size: 70px;
+    margin: auto 0px;
+    color: var(--white);
+}
+
+.left img {
+    width: 64px;
+}
+
+.right {
+    background-color: var(--white);
+    width: 50%;
+    height: 100%;
+    padding: 60px;
+    color: #1e1e1e;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.right p {
+    color: #1e1e1e5f;
+    width: 65%;
+    margin-bottom: 60px;
+}
+
+.right form {
+    display: flex;
+    flex-direction: column;
+}
+
+.right form h4 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.right form label {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.right form input {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    border: #1e1e1e4c 1px solid;
+}
+
+.right form input:focus {
+    box-shadow: #00a6e83f 0px 2px 8px 0px;
+    border: var(--dark-blue) 1px solid;
+    transition: all ease 0.3s;
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btns button {
+    width: 47%;
+    font-size: 18px;
+    padding: 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btns button:first-child {
+    border: var(--dark-blue) 2px solid;
+    background-color: transparent;
+    color: var(--dark-blue);
+    border-radius: 5px;
+}
+
+.btns button:last-child {
+    border: var(--dark-blue) 2px solid;
+    background-color: var(--dark-blue);
+    color: #fafafa;
+    border-radius: 5px;
+}
+
+.btns button:first-child:hover,
+.btns button:last-child:hover {
+    box-shadow: #006d772c 0px 2px 8px 0px;
+    transition: all ease 0.3s;
+}
+
+.right .sign {
+    width: 100%;
+    text-align: center;
+    color: #1e1e1e;
+    margin-bottom: 0px;
+    margin-top: 85px;
+    font-size: 18px;
+}
+
+.sign a {
+    color: #006d77ff;
+}
+
+.labels {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #1e1e1e;
+}
+
+.labels label {
+    width: 47% !important;
+}
+
+.wiki-body {
+    background-color: var(--dark-blue);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.wiki-body article {
+    height: 98%;
+    overflow-y: auto;
+    margin-right: 0.5%;
+    border-radius: 20px;
+    width: 96%;
+    background-color: var(--white);
+}
+
+.wiki-body aside {
+    height: 100%;
+    width: 4%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding: 20px;
+}
+.brand{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.brand img{
+    
+}
+.wiki-body aside:hover {
+    width: 10%;
+    transition: all ease-in-out 0.3s;
+}
+.wiki-body aside:hover .wiki-body article{
+    width: 90%;
+    transition: all ease-in-out 0.3s;
+}
+.hidden{
+    display: none;
+}
+.wiki-body aside:hover .hidden{
+    display: block;
+    transition: all ease-in-out 0.3s;
+}

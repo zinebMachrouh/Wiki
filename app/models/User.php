@@ -34,17 +34,15 @@ class User
             return null;
         }
     }
-    public function insertData($fname, $lname, $email, $service, $tel, $password)
+    public function insertData($fname, $lname, $email, $password)
     {
         try {
-            $query = "INSERT INTO users (fname, lname, email, service, tel, password) VALUES (:fname, :lname, :email, :service, :tel, :password)";
+            $query = "INSERT INTO users (fname, lname, email, password) VALUES (:fname, :lname, :email, :password)";
             $this->conn->query($query);
 
             $this->conn->bind(':fname', $fname);
             $this->conn->bind(':lname', $lname);
             $this->conn->bind(':email', $email);
-            $this->conn->bind(':service', $service);
-            $this->conn->bind(':tel', $tel);
             $this->conn->bind(':password', $password);
 
             $this->conn->execute();
@@ -84,9 +82,7 @@ class User
         $row = $this->conn->single();
 
         if ($row && property_exists($row, 'password')) {
-            $stored_password = base64_decode($row->password);
-
-            if ($password === $stored_password) {
+            if (password_verify($password, $row->password)) {
                 return $row;
             }
         }
@@ -109,7 +105,7 @@ class User
     }
     public function updateUser($id, $fname, $lname, $birthdate, $service, $adress, $tel, $email, $pswd)
     {
-        $pswd = base64_encode($pswd);
+        $pswd = password_hash($pswd, PASSWORD_DEFAULT);
 
         $this->conn->query("UPDATE users 
                                     SET 
@@ -145,78 +141,4 @@ class User
         $_SESSION = array();
         session_destroy();
     }
-    //Members Dashboard Methods
-    public function getUserAndTeamInfoByEmail($email)
-    {
-        $query = "
-            SELECT
-                users.*,
-                team_user.team_id AS teamId,
-                teams.name AS team_name,
-                teams.description AS team_description
-            FROM
-                users
-            JOIN
-                team_user ON users.id = team_user.user_id
-            JOIN
-                teams ON team_user.team_id = teams.id
-            WHERE
-                users.email = :email
-        ";
-
-        $this->conn->query($query);
-        $this->conn->bind(':email', $email, PDO::PARAM_STR);
-        $this->conn->execute();
-        $user = $this->conn->single(PDO::FETCH_ASSOC);
-
-        return $user;
-    }
-
-    public function getUserTeamsById($userId)
-    {
-        $query = "SELECT team_id FROM team_user WHERE user_id = :userId";
-
-        $this->conn->query($query);
-        $this->conn->bind(':userId', $userId, PDO::PARAM_INT);
-        $this->conn->execute();
-
-        $userTeams = $this->conn->resultSet(PDO::FETCH_ASSOC);
-
-        return $userTeams;
-    }
-
-    //Admin Dashboard Methods
-    public function getUsersByAdmin($role)
-    {
-        $query = "SELECT * FROM users WHERE role != :role";
-
-        $this->conn->query($query);
-        $this->conn->bind(':role', $role, PDO::PARAM_INT);
-        $this->conn->execute();
-
-        return $this->conn->resultSet(PDO::FETCH_ASSOC);
-    }
-
-    public function updateRole($id, $newRole)
-    {
-        $this->conn->query("UPDATE users SET role = :newRole WHERE id = :userID");
-        $this->conn->bind(':newRole', $newRole);
-        $this->conn->bind(':userID', $id);
-        $this->conn->execute();
-    }
-
-    public function getScrumMasters()
-    {
-        $this->conn->query("SELECT * FROM users WHERE role = 2");
-        $this->conn->execute();
-        return $this->conn->resultSet();
-    }
-
-    public function getProductOwners()
-    {
-        $this->conn->query("SELECT * FROM users where role = 1");
-        $this->conn->execute();
-        return $this->conn->resultSet();
-    }
-
 }
