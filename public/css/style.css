@@ -184,6 +184,7 @@
 
 .wiki-body article {
     height: 98%;
+    padding: 20px 30px;
     overflow-y: auto;
     margin-right: 0.5%;
     border-radius: 20px;
@@ -200,26 +201,77 @@
     align-items: center;
     padding: 20px;
 }
-.brand{
+
+.brand {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.brand img{
-    
-}
+
 .wiki-body aside:hover {
     width: 10%;
     transition: all ease-in-out 0.3s;
 }
-.wiki-body aside:hover .wiki-body article{
+
+.wiki-body aside:hover .wiki-body article {
     width: 90%;
     transition: all ease-in-out 0.3s;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
-.wiki-body aside:hover .hidden{
+
+.wiki-body aside:hover .hidden {
     display: block;
     transition: all ease-in-out 0.3s;
+}
+
+.brand img {
+    width: 42px;
+    height: 42px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.search-bar {
+    width: 400px;
+    display: flex;
+    align-items: center;
+
+}
+
+.search-bar input {
+    width: 90%;
+    padding: 10px;
+    background-color: var(--white);
+    /* border-radius: 5px 0px 0px 5px; */
+    border: none;
+    color: #1e1e1e;
+    font-size: 13px;
+    outline: none;
+    caret-color: var(--dark-blue);
+    border-bottom: var(--dark-blue) 1px solid;
+}
+
+.search-bar i {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    border-bottom: var(--dark-blue) 1px solid;
+    padding: 12px 0px;
+    /* border-radius: 0px 5px 5px 0px; */
 }

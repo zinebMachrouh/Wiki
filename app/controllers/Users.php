@@ -17,6 +17,7 @@ class Users extends Controller
 
     public function index()
     {
+        $_SESSION['auth'] = false;
         $this->view('users/dashboards/visitor');
     }
 
@@ -41,19 +42,17 @@ class Users extends Controller
 
             $data = [
                 'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
+                'password' => (preg_match($pswdP, $_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_DEFAULT) : false),
             ];
 
             if ($this->userModel->findUserByEmail($data['email'])) {
-                echo '<script>alert("' . var_dump($data) . '")</script>';
 
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-                var_dump($loggedInUser);
-                if ($loggedInUser && preg_match($emailP, $data['email']) && preg_match($pswdP, $data['password'])) {
+                if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
                     redirect('users/dashboard');
                 } else {
-                    echo '<script>alert("'.var_dump($data).'")</script>';
+                    echo '<script>alert("Info incorrect")</script>';
 
                     $this->view('users/index', $data);
                 }
@@ -61,12 +60,8 @@ class Users extends Controller
                 echo '<script>alert("No user found")</script>';
             }
         } else {
-            $data = [
-                'email' => '',
-                'password' => '',
-            ];
 
-            $this->view('users/index', $data);
+            $this->view('users/index');
         }
     }
     public function signup()
@@ -96,6 +91,7 @@ class Users extends Controller
     {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
+        $_SESSION['auth'] = true;
     }
 
     public function logout()

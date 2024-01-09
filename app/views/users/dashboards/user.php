@@ -13,6 +13,7 @@
     <aside></aside>
     <article>
         <h1>hello ur logged</h1>
+        <a href="<?php echo URLROOT; ?>/users/logout">LogOut</a>
     </article>
 </body>
 
