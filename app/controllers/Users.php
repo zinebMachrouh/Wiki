@@ -2,11 +2,16 @@
 class Users extends Controller
 {
     private $userModel;
-
+    private $wikiModel;
+    private $categoryModel;
+    private $tagModel;
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->wikiModel = $this->model('Wiki');
+        $this->categoryModel = $this->model('Category');
+        $this->tagModel = $this->model('Tag');
     }
 
     public function getUserModel()
@@ -18,7 +23,12 @@ class Users extends Controller
     public function index()
     {
         $_SESSION['auth'] = false;
-        $this->view('users/dashboards/visitor');
+        $data = [
+            'wikis' => $this->wikiModel->getAll(),
+            'categories' => $this->categoryModel->getAll(),
+            'tags'=> $this->tagModel->getAll(),
+        ];
+        $this->view('users/dashboards/visitor',$data);
     }
 
     //Authentication Methods
@@ -45,8 +55,12 @@ class Users extends Controller
                 'password' => (preg_match($pswdP, $_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_DEFAULT) : false),
             ];
 
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
             if ($this->userModel->findUserByEmail($data['email'])) {
 
+                // $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);

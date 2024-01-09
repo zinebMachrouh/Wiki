@@ -8,60 +8,6 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/style.css">
     <script src="https://kit.fontawesome.com/6e1faf1eda.js" crossorigin="anonymous"></script>
     <title>Wiki</title>
-    <style>
-        .brand img {
-            width: 42px;
-            height: 42px;
-        }
-
-        article {
-            padding: 20px 30px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .row {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .search-bar {
-            width: 400px;
-            display: flex;
-            align-items: center;
-
-        }
-
-        .search-bar input {
-            width: 90%;
-            padding: 10px;
-            background-color: var(--white);
-            /* border-radius: 5px 0px 0px 5px; */
-            border: none;
-            color: #1e1e1e;
-            font-size: 13px;
-            outline: none;
-            caret-color: var(--dark-blue);
-            border-bottom: var(--dark-blue) 1px solid;
-        }
-
-        .search-bar i {
-            width: 10%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fafafa;
-            border-bottom: var(--dark-blue) 1px solid;
-            padding: 12px 0px;
-            /* border-radius: 0px 5px 5px 0px; */
-        }
-    </style>
 </head>
 
 <body class="wiki-body">
@@ -116,10 +62,41 @@
             </div>
         </div>
         <main>
-            <div class="latest-wikis"></div>
+            <div class="latest-wikis">
+                <div class="title">Latest Wikis</div>
+                <div class="cards">
+                    <?php 
+                        foreach ($data['wikis'] as $wiki) {
+                            # code...
+                        }
+                    ?>
+                </div>
+            </div>
             <div class="col">
-                <div class="latest-cats"></div>
-                <div class="latest-tags"></div>
+                <div class="latest-cats">
+                    <h2 class="title">Latest Categories</h2>
+                    <?php
+                    foreach ($data['categories'] as $category) {
+                        echo '<div class="category">
+                                <div >
+                                    <h4>' . $category->title . '</h4>
+                                    <p>' . $category->description . '</p>
+                                </div>
+                                <h4>' . $category->countWikis . ' Wikis</h4>
+                            </div>';
+                    }
+                    ?>
+                </div>
+                <div class="latest-tags">
+                    <h2 class="title">Trendy Tags</h2>
+                    <div class="tags">
+                        <?php
+                        foreach ($data['tags'] as $tag) {
+                            echo '<h4 class="capsule">#' . $tag->title . '</h4>';
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
         </main>
     </article>

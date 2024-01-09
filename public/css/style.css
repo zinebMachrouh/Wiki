@@ -275,3 +275,132 @@
     padding: 12px 0px;
     /* border-radius: 0px 5px 5px 0px; */
 }
+
+.brand img {
+    width: 42px;
+    height: 42px;
+}
+
+article {
+    padding: 20px 30px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.search-bar {
+    width: 400px;
+    display: flex;
+    align-items: center;
+
+}
+
+.search-bar input {
+    width: 90%;
+    padding: 10px;
+    background-color: var(--white);
+    /* border-radius: 5px 0px 0px 5px; */
+    border: none;
+    color: #1e1e1e;
+    font-size: 13px;
+    outline: none;
+    caret-color: var(--dark-blue);
+    border-bottom: var(--dark-blue) 1px solid;
+}
+
+.search-bar i {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    border-bottom: var(--dark-blue) 1px solid;
+    padding: 12px 0px;
+    /* border-radius: 0px 5px 5px 0px; */
+}
+
+main {
+    display: flex;
+    /* align-items: center; */
+    margin-top: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.latest-wikis {
+    width: 75%;
+    height: 84vh;
+    background-color: red;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.col {
+    width: 400px;
+}
+
+.latest-cats {
+    width: 100%;
+    /* background-color: green; */
+    background-color: #fff;
+    height: fit-content;
+    border: 2px solid var(--dark-blue);
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+
+.latest-tags {
+    width: 100%;
+        background-color: #fff;
+    height: fit-content;
+    /* background-color: blue; */
+    border: 2px solid var(--dark-blue);
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+
+.title {
+    margin-bottom: 10px;
+    color: var(--dark-blue);
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0px;
+}
+
+.category:not(:last-child) {
+    border-bottom: #b0b0b0 1px solid;
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.capsule {
+    background-color: var(--med-blue);
+    color: var(--dark-blue);
+    padding: 5px 25px;
+    border-radius: 20px;
+}
