@@ -80,12 +80,12 @@ class User
         $this->conn->bind(':email', $email);
 
         $row = $this->conn->single();
-        // if ($row && property_exists($row, 'password')) {
+        if ($row && property_exists($row, 'password')) {
             if (password_verify($password, $row->password)) {
                 return $row;
                 
             }
-        // }
+        }
 
         return false;
     }

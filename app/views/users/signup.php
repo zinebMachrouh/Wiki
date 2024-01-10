@@ -7,9 +7,15 @@
     <title>SignUp</title>
     <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css" type="text/css">
+    <script src="https://kit.fontawesome.com/6e1faf1eda.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body class="login-body">
+    <a href="<?php echo URLROOT; ?>/users/index" class="back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
     <div class="login-page">
         <div class="left">
             <img src="<?php echo URLROOT; ?>/assets/logo.png" alt="logo">
@@ -42,7 +48,7 @@
                     <button type="submit" name="sendF">Submit</button>
                 </div>
             </form>
-            <p class="sign">Alreadt Have an account? <a href="../index.php">LogIn</a></p>
+            <p class="log">Alreadt Have an account? <a href="<?php echo URLROOT; ?>/users/loginPage">LogIn</a></p>
         </div>
     </div>
 </body>

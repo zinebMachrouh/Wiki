@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
+    <script src="https://kit.fontawesome.com/6e1faf1eda.js" crossorigin="anonymous"></script>
+
     <title>LogIn</title>
 </head>
 
 <body class="login-body">
+    <a href="<?php echo URLROOT; ?>/users/index" class="back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
     <div class="login-page">
         <div class="left">
             <img src="<?php echo URLROOT; ?>/assets/logo.png" alt="logo">

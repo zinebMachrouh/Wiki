@@ -52,17 +52,14 @@ class Users extends Controller
 
             $data = [
                 'email' => trim($_POST['email']),
-                'password' => (preg_match($pswdP, $_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_DEFAULT) : false),
+                'password' => trim($_POST['password']),
             ];
-
-            $email = $_POST['email'];
-            $password = $_POST['password'];
 
             if ($this->userModel->findUserByEmail($data['email'])) {
 
-                // $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-                if ($loggedInUser) {
+
+                if ($loggedInUser && preg_match($emailP, $data['email']) && preg_match($pswdP, $data['password'])) {
                     $this->createUserSession($loggedInUser);
                     redirect('users/dashboard');
                 } else {
@@ -119,7 +116,14 @@ class Users extends Controller
     // Dashboard
     public function dashboard()
     {
-        $this->view('users/dashboards/user');
+        $data = [
+            'wikis' => $this->wikiModel->getAll(),
+            'categories' => $this->categoryModel->getAll(),
+            'tags' => $this->tagModel->getAll(),
+            'user' => $this->userModel->getUserById($_SESSION['user_id']),
+        ];
+
+        $this->view('users/dashboards/user',$data);
 
     }
 }

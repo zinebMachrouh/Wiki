@@ -63,18 +63,36 @@
         </div>
         <main>
             <div class="latest-wikis">
-                <div class="title">Latest Wikis</div>
+                <h2>Latest Wikis</h2>
                 <div class="cards">
-                    <?php 
-                        foreach ($data['wikis'] as $wiki) {
-                            # code...
-                        }
+                    <?php
+                    foreach ($data['wikis'] as $wiki) {
+                        $date = new DateTime($wiki->created_at);
+                        echo '<div class="card">
+                                <div class="card-side" style="background: url(' . URLROOT . '/assets/mini-bg.png)">
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-header">
+                                        <h4>' . $wiki->title . '</h4>
+                                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <span>'.$wiki->category.'</span>
+                                        <p>'.$wiki->content.'</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span>By '.$wiki->fname.' '.$wiki->lname.'</span>
+                                        <span>'. $date->format('d-m-Y').'</span>
+                                    </div>
+                                </div>
+                            </div>';
+                    }
                     ?>
                 </div>
             </div>
             <div class="col">
                 <div class="latest-cats">
-                    <h2 class="title">Latest Categories</h2>
+                    <h2>Latest Categories</h2>
                     <?php
                     foreach ($data['categories'] as $category) {
                         echo '<div class="category">
@@ -88,7 +106,7 @@
                     ?>
                 </div>
                 <div class="latest-tags">
-                    <h2 class="title">Trendy Tags</h2>
+                    <h2>Trendy Tags</h2>
                     <div class="tags">
                         <?php
                         foreach ($data['tags'] as $tag) {
