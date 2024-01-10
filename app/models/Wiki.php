@@ -18,6 +18,19 @@ class Wiki
             ORDER BY wikis.created_at DESC");
         return $this->conn->resultSet();
     }
+
+    public function getWikisByUserId()
+    {
+        $this->conn->query("SELECT wikis.*, categories.title AS category, users.fname AS fname, users.lname AS lname
+            FROM wikis
+            INNER JOIN categories ON categories.id = wikis.category_id
+            INNER JOIN users ON users.id = wikis.user_id
+            WHERE wikis.deleted = 0 AND wikis.archived = 0 AND wikis.user_id = :user_id
+            ORDER BY wikis.created_at DESC");
+            $this->conn->bind(':user_id', $_SESSION['user_id']);
+        return $this->conn->resultSet();
+    }
+
     public function Add($wiki)
     {
         try {
@@ -66,4 +79,5 @@ class Wiki
         $this->conn->bind(':tag_id', $tag_id);
         $this->conn->execute();
     }
+
 }

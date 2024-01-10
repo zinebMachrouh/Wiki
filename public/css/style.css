@@ -236,6 +236,23 @@
     display: block;
     transition: all ease-in-out 0.3s;
 } */
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+nav a {
+    padding: 10px;
+    font-size: 22px;
+    color: var(--white);
+}
+
+nav a:hover {
+    transition: all ease 0.3s;
+    color: var(--med-blue);
+}
 
 .brand img {
     width: 42px;
@@ -371,7 +388,7 @@ main {
 
 .latest-tags h2,
 .latest-wikis h2,
-.latest-cats h2 {
+.latest-cats h2, .myWikis h2 {
     margin-bottom: 10px;
     font-size: 18px;
     color: var(--dark-blue);
@@ -451,7 +468,7 @@ main {
 }
 
 .card-body {
-    width: 70%;
+    width: 75%;
     padding: 5px 10px;
 }
 
@@ -548,14 +565,16 @@ label select:focus {
     margin-bottom: 10px;
 
 }
-textarea{
-        padding: 12px 7px;
+
+textarea {
+    padding: 12px 7px;
     width: 100%;
     border-radius: 5px;
     border: 1px solid #1e1e1e;
     outline: none;
     margin-bottom: 10px;
 }
+
 select {
     padding: 12px 7px;
     width: 100%;
@@ -643,6 +662,52 @@ select {
     /* border-radius: 0px 5px 5px 0px; */
 }
 
+.myWikis {
+    width: 100%;
+    height: 80vh;
+    overflow-y: auto;
+    padding: 0px 10px 10px 0px;
+}
+.myWikis .card{
+    width: 40%;
+}
+.dropbtn {
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding-left: 15px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 5;
+}
+
+.dropdown-content span {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 @media screen and (max-width: 1300px) {
 
 
@@ -652,6 +717,6 @@ select {
 
     .latest-wikis {
         width: 100%;
-        height: fit-content;
+        /* height: fit-content; */
     }
 }

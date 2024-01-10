@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?php echo URLROOT; ?>/assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/6e1faf1eda.js" crossorigin="anonymous"></script>
     <title>Wiki</title>
 </head>
@@ -19,21 +20,27 @@
             </div>
         </div>
         <nav>
-            <a href="#"><i class="fa-solid fa-house"></i>
+            <a href="#"><i class="bi bi-grid-1x2-fill"></i>
                 <div class="hidden">
                     <h4>Home</h4>
                 </div>
             </a>
-            <a href="#"><i class="fa-solid fa-globe"></i>
+            <a href="<?php echo URLROOT; ?>/users/profile"><i class="fa-solid fa-user"></i>
                 <div class="hidden">
-                    <h4>Explore</h4>
+                    <h4>Profile</h4>
                 </div>
             </a>
-            <a href="<?php echo URLROOT; ?>/users/loginPage"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <a href="<?php echo URLROOT; ?>/wikis/addWiki"><i class="fa-solid fa-plus"></i>
                 <div class="hidden">
-                    <h4>LogIn</h4>
+                    <h4>Add Wiki</h4>
                 </div>
             </a>
+            <a href="<?php echo URLROOT; ?>/users/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <div class="hidden">
+                    <h4>LogOut</h4>
+                </div>
+            </a>
+
         </nav>
     </aside>
     <article>
@@ -49,7 +56,6 @@
                     <input type="text" name="searchInput" id="searchInput" placeholder="Search..." onkeydown="handleEnterKey(event)">
                     <i class="fa-solid fa-magnifying-glass" style="color: #b0b0b0;"></i>
                 </div>
-                <a href="<?php echo URLROOT; ?>/wikis/addWiki">New Wiki</a>
             </div>
         </div>
         <main>

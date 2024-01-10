@@ -34,5 +34,12 @@ class Wikis extends Controller
         foreach ($data['tags'] as $tag) {
             $this->wikiModel->attachTag($lastId,$tag);
         }
+
+        redirect('users/profile');
+    }
+    public function deleteOne($id){
+        $this->wikiModel->Delete($id);
+        redirect('users/profile');
+
     }
 }

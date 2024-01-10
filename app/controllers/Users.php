@@ -126,4 +126,14 @@ class Users extends Controller
         $this->view('users/dashboards/user',$data);
 
     }
+
+    public function profile(){
+        $data = [
+            'wikis' => $this->wikiModel->getWikisByUserId(),
+            'user' => $this->userModel->getUserById($_SESSION['user_id']),
+        ];
+
+        $this->view('users/profile', $data);
+
+    }
 }
