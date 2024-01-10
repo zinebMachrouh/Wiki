@@ -21,13 +21,14 @@ class Wiki
     public function Add($wiki)
     {
         try {
-            $this->conn->query("INSERT INTO Wikis VALUES( :title, :content, :user_id ,:category_id)");
-            $this->conn->bind(':title', $wiki->title);
-            $this->conn->bind(':content', $wiki->content);
+            $this->conn->query("INSERT INTO Wikis(title, content, user_id, category_id) VALUES( :title, :content, :user_id ,:category_id)");
+            $this->conn->bind(':title', $wiki['title']);
+            $this->conn->bind(':content', $wiki['content']);
             $this->conn->bind(':user_id', $_SESSION['user_id']);
-            $this->conn->bind(':category_id', $wiki->category_id);
+            $this->conn->bind(':category_id', $wiki['category_id']);
 
             $this->conn->execute();
+            return $this->conn->lastInsertId();
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -56,5 +57,13 @@ class Wiki
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function attachTag($wiki_id, $tag_id)
+    {
+        $this->conn->query("INSERT INTO tag_wiki(tag_id, wiki_id) VALUES(:tag_id,:wiki_id)");
+        $this->conn->bind(':wiki_id', $wiki_id);
+        $this->conn->bind(':tag_id', $tag_id);
+        $this->conn->execute();
     }
 }

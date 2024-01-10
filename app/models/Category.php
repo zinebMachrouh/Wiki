@@ -13,4 +13,9 @@ class Category
         $this->conn->query("SELECT c.*, COUNT(w.id) AS countWikis FROM Categories c LEFT JOIN Wikis w ON c.id = w.category_id GROUP BY c.id ORDER BY c.created_at DESC LIMIT 6");
         return $this->conn->resultSet();
     }
+    public function getCats()
+    {
+        $this->conn->query("SELECT DISTINCT * from categories");
+        return $this->conn->resultSet();
+    }
 }

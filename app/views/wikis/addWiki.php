@@ -15,32 +15,37 @@
         <i class="fa-solid fa-arrow-left"></i>
     </a>
     <div class="create-form">
-        <h2>Data<img src="<?php echo URLROOT; ?>/assets/logo.png" alt=brand />are</h2>
+        <h2><img src="<?php echo URLROOT; ?>/assets/logoDark.png" alt=brand />Wiki</h2>
 
-        <form action="<?php echo URLROOT; ?>/projects/createProject" method="post">
-            <label for="name">
-                <h4>Project Name</h4>
-                <input type="text" name="name" id="name" required placeholder="Enter Project Name">
+        <form action="<?php echo URLROOT; ?>/wikis/insertData" method="post">
+            <label for="title">
+                <h4>Title</h4>
+                <input type="text" name="title" id="title" required placeholder="Enter Title">
             </label>
-            <label for="date_start">
-                <h4>Start Date</h4>
-                <input type="date" name="date_start" id="date_start" required>
+            <label for="content">
+                <h4>Content</h4>
+                <textarea type="text" name="content" id="content" cols="82" rows="5" required placeholder="Write a creative content <3" style="resize: none;"></textarea>
             </label>
-            <label for="date_end">
-                <h4>End Date</h4>
-                <input type="date" name="date_end" id="date_end" required>
-            </label>
-            <label for="status">
-                <h4>Status</h4>
-                <select name="status" id="status">
-                    <option value="" hidden>Pick a status</option>
-                    <option value="0">Active</option>
-                    <option value="1">Done</option>
+            <label for="category">
+                <h4>category</h4>
+                <select name="category" id="category">
+                    <option value="" hidden>Pick a Category</option>
+                    <?php
+                    foreach ($data['categories'] as $cat) {
+                        echo '<option value="' . $cat->id . '">' . $cat->title . '</option>';
+                    }
+                    ?>
                 </select>
             </label>
-            <label for="description">
-                <h4>Description</h4>
-                <input type="text" name="description" id="description" placeholder="lorem ipsum doleres">
+            <label for="tags">
+                <h4>Tags</h4>
+                <div class="addTags">
+                    <?php
+                    foreach ($data['tags'] as $tag) {
+                        echo '<label class="tag" for="' . $tag->id . '"><input type="checkbox" name="tag[]" id="' . $tag->id . '" value="'. $tag->id.'">' . $tag->title . '</label>';
+                    }
+                    ?>
+                </div>
             </label>
             <div class="btns">
                 <button type="reset">Cancel</button>

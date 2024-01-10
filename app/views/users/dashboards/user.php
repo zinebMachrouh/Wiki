@@ -49,7 +49,7 @@
                     <input type="text" name="searchInput" id="searchInput" placeholder="Search..." onkeydown="handleEnterKey(event)">
                     <i class="fa-solid fa-magnifying-glass" style="color: #b0b0b0;"></i>
                 </div>
-                <a href="#">New Wiki</a>
+                <a href="<?php echo URLROOT; ?>/wikis/addWiki">New Wiki</a>
             </div>
         </div>
         <main>

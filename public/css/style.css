@@ -311,37 +311,6 @@
     gap: 5px;
 }
 
-.search-bar {
-    width: 400px;
-    display: flex;
-    align-items: center;
-
-}
-
-.search-bar input {
-    width: 90%;
-    padding: 10px;
-    background-color: var(--white);
-    /* border-radius: 5px 0px 0px 5px; */
-    border: none;
-    color: #1e1e1e;
-    font-size: 13px;
-    outline: none;
-    caret-color: var(--dark-blue);
-    border-bottom: var(--dark-blue) 2px solid;
-}
-
-.search-bar i {
-    width: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--white);
-    border-bottom: var(--dark-blue) 2px solid;
-    padding: 12px 0px;
-    /* border-radius: 0px 5px 5px 0px; */
-}
-
 main {
     display: flex;
     /* align-items: center; */
@@ -428,6 +397,24 @@ main {
     gap: 20px;
 }
 
+.addTags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    width: 100%;
+    padding: 10px;
+}
+
+.addTags::-webkit-scrollbar {
+    display: none;
+}
+
 .capsule {
     background-color: var(--med-blue);
     color: var(--dark-blue);
@@ -508,6 +495,152 @@ main {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.create-form {
+    width: 600px;
+    height: 720px;
+    background-color: #fafafa;
+    border-radius: 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    overflow: hidden;
+
+}
+
+.create-form h2 {
+    display: flex;
+    align-items: center;
+    color: #1e1e1e;
+    font-size: 30px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.create-form form {
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+label h4 {
+    font-size: 20px;
+    color: #1e1e1e;
+    margin-bottom: 5px
+}
+
+
+label input:focus,
+label select:focus {
+    box-shadow: #006d772c 0px 2px 8px 0px;
+    border: var(--dark-blue) 1px solid;
+    transition: all ease 0.3s;
+}
+
+
+.create-form input:not([type="checkbox"]) {
+    padding: 12px 7px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #1e1e1e;
+    outline: none;
+    margin-bottom: 10px;
+
+}
+textarea{
+        padding: 12px 7px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #1e1e1e;
+    outline: none;
+    margin-bottom: 10px;
+}
+select {
+    padding: 12px 7px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #1e1e1e;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btns button {
+    font-size: 18px;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    width: 180px;
+}
+
+.btns button:first-child {
+    border: var(--dark-blue) 2px solid;
+    background-color: transparent;
+    color: var(--dark-blue);
+    border-radius: 5px;
+}
+
+.btns button:last-child {
+    border: var(--dark-blue) 2px solid;
+    background-color: var(--dark-blue);
+    color: #fafafa;
+    border-radius: 5px;
+}
+
+.btns button:first-child:hover,
+.btns button:last-child:hover {
+    box-shadow: #006d772c 0px 2px 8px 0px;
+    transition: all ease 0.3s;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+    justify-content: center;
+}
+
+
+.search-bar {
+    width: 400px;
+    display: flex;
+    align-items: center;
+
+}
+
+.search-bar input {
+    width: 90%;
+    padding: 10px;
+    background-color: var(--white);
+    /* border-radius: 5px 0px 0px 5px; */
+    border: none;
+    color: #1e1e1e;
+    font-size: 13px;
+    outline: none;
+    caret-color: var(--dark-blue);
+    border-bottom: var(--dark-blue) 2px solid;
+}
+
+.search-bar i {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    border-bottom: var(--dark-blue) 2px solid;
+    padding: 12px 0px;
+    /* border-radius: 0px 5px 5px 0px; */
 }
 
 @media screen and (max-width: 1300px) {
