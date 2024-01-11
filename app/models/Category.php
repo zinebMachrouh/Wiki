@@ -18,4 +18,10 @@ class Category
         $this->conn->query("SELECT DISTINCT * from categories");
         return $this->conn->resultSet();
     }
+    public function getOne($id){
+        $this->conn->query("SELECT * from categories where id = :id");
+        $this->conn->bind(':id', $id);
+        return $this->conn->single();
+
+    }
 }

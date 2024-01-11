@@ -46,18 +46,10 @@
     <article>
         <div class="header">
             <?php
-            if ($_SESSION['auth']) {
-                echo '<div class="header-left">
-                            <h2>Welcome ' . $data['user']->fname . ' ' . $data['user']->lname . '</h2>
-
-                        <p>👋 It\'s time to be creative!</p>
-                    </div>';
-            } else {
-                echo '<div class="header-left">
-                        <h2>Welcome Visitor!</h2>
-                        <p>👋 It\'s time to be creative!</p>
-                    </div>';
-            }
+            echo '<div class="header-left">
+                    <h2>Welcome ' . $data['user']->fname . ' ' . $data['user']->lname . '</h2>
+                    <p>👋 It\'s time to be creative!</p>
+                </div>';
             ?>
             <div class="header-right">
                 <div class="search-bar">
@@ -84,8 +76,8 @@
                                             <div class="dropdown-content">
                                                 <span>
                                                 <a href="' . URLROOT . '/wikis/updateForm/' . $wiki->id . '"><i class="fa-solid fa-pencil" style="color: #42999B;"></i></a>
-                                                <a href="' . URLROOT . '/wikis/deleteOne/'.$wiki->id.'"><i class="fa-solid fa-trash-can" style="color: #42999B;"></i></a>
-                                                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
+                                                <a href="' . URLROOT . '/wikis/deleteOne/' . $wiki->id . '"><i class="fa-solid fa-trash-can" style="color: #42999B;"></i></a>
+                                                <a href="' . URLROOT . '/wikis/wikiDetails/' . $wiki->id . '"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
                                                 </span>
                                             </div>
                                         </div>

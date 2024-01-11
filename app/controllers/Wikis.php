@@ -69,4 +69,14 @@ class Wikis extends Controller
         redirect('users/profile');
 
     }
+    public function wikiDetails($id)
+    {
+        $data = [
+            'wiki' => $this->wikiModel->getWiki($id),
+            'tagsWiki' => $this->tagModel->getTagByWikiId($id),
+            'category' => $this->categoryModel->getOne($this->wikiModel->getWiki($id)->category_id),
+        ];
+        $this->view('wikis/details', $data);
+
+    }
 }

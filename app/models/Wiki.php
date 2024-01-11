@@ -14,7 +14,7 @@ class Wiki
             FROM wikis
             INNER JOIN categories ON categories.id = wikis.category_id
             INNER JOIN users ON users.id = wikis.user_id
-            WHERE wikis.deleted = 0 AND wikis.archived = 0
+            WHERE wikis.removed = 0
             ORDER BY wikis.created_at DESC");
         return $this->conn->resultSet();
     }
@@ -25,7 +25,7 @@ class Wiki
             FROM wikis
             INNER JOIN categories ON categories.id = wikis.category_id
             INNER JOIN users ON users.id = wikis.user_id
-            WHERE wikis.deleted = 0 AND wikis.archived = 0 AND wikis.user_id = :user_id
+            WHERE wikis.removed = 0 AND wikis.user_id = :user_id
             ORDER BY wikis.created_at DESC");
             $this->conn->bind(':user_id', $_SESSION['user_id']);
         return $this->conn->resultSet();
@@ -50,11 +50,13 @@ class Wiki
     public function Update($title, $content, $category_id, $id)
     {
         try {
-            $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id WHERE id = :wiki_id");
+            $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id, created_at = :created_at WHERE id = :wiki_id");
             $this->conn->bind(':title', $title);
             $this->conn->bind(':content', $content);
             $this->conn->bind(':category_id', $category_id);
             $this->conn->bind(':wiki_id', $id);
+            $current = new DateTime('now');
+            $this->conn->bind(':created_at', $current->format('Y-m-d H:i:s'));
 
             $this->conn->execute();
         } catch (PDOException $e) {
@@ -65,8 +67,8 @@ class Wiki
     public function Delete($Wiki_ID)
     {
         try {
-            $this->conn->query("DELETE FROM wikis WHERE id = :Wiki_ID");
-            $this->conn->bind(':Wiki_ID', $Wiki_ID);
+            $this->conn->query("UPDATE wikis SET removed = 1 WHERE id = :wiki_id");
+            $this->conn->bind(':wiki_id', $Wiki_ID);
             $this->conn->execute();
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -101,4 +103,6 @@ class Wiki
             $this->conn->execute();
         }
     }
+
+
 }
