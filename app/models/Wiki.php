@@ -83,7 +83,7 @@ class Wiki
         $this->conn->execute();
     }
     public function getWiki($id){
-        $this->conn->query("SELECT DISTINCT * FROM wikis where id = :id");
+        $this->conn->query("SELECT DISTINCT * FROM wikis INNER JOIN users ON wikis.user_id = users.id where wikis.id = :id");
         $this->conn->bind(':id', $id);
         $this->conn->execute();
         return $this->conn->single();

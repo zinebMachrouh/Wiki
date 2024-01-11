@@ -71,7 +71,7 @@
                                 <div class="card-body">
                                     <div class="card-header">
                                         <h4>' . $wiki->title . '</h4>
-                                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                        <a href="' . URLROOT . '/wikis/wikiDetails/' . $wiki->id . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                                     </div>
                                     <div class="card-content">
                                         <span>' . $wiki->category . '</span>
