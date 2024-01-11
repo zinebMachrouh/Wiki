@@ -26,9 +26,9 @@ class Users extends Controller
         $data = [
             'wikis' => $this->wikiModel->getAll(),
             'categories' => $this->categoryModel->getAll(),
-            'tags'=> $this->tagModel->getAll(),
+            'tags' => $this->tagModel->getAll(),
         ];
-        $this->view('users/dashboards/visitor',$data);
+        $this->view('users/dashboards/visitor', $data);
     }
 
     //Authentication Methods
@@ -88,7 +88,7 @@ class Users extends Controller
                 'fname' => (preg_match($nameRegex, $_POST['fname']) ? trim($_POST['fname']) : false),
                 'lname' => (preg_match($nameRegex, $_POST['lname']) ? trim($_POST['lname']) : false),
                 'email' => (preg_match($emailRegex, $_POST['email']) ? trim($_POST['email']) : false),
-                'password' => (preg_match($passwordRegex, $_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_DEFAULT) : false),
+                'password' => (preg_match($passwordRegex, $_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_BCRYPT) : false),
             ];
 
             $this->userModel->insertData($data['fname'], $data['lname'], $data['email'], $data['password']);
@@ -123,17 +123,16 @@ class Users extends Controller
             'user' => $this->userModel->getUserById($_SESSION['user_id']),
         ];
 
-        $this->view('users/dashboards/user',$data);
-
+        $this->view('users/dashboards/user', $data);
     }
 
-    public function profile(){
+    public function profile()
+    {
         $data = [
             'wikis' => $this->wikiModel->getWikisByUserId(),
             'user' => $this->userModel->getUserById($_SESSION['user_id']),
         ];
 
         $this->view('users/profile', $data);
-
     }
 }

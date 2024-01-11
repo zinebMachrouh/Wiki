@@ -83,7 +83,7 @@
                                             <button class="dropbtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                                             <div class="dropdown-content">
                                                 <span>
-                                                <a href="#"><i class="fa-solid fa-pencil" style="color: #42999B;"></i></a>
+                                                <a href="' . URLROOT . '/wikis/updateForm/' . $wiki->id . '"><i class="fa-solid fa-pencil" style="color: #42999B;"></i></a>
                                                 <a href="' . URLROOT . '/wikis/deleteOne/'.$wiki->id.'"><i class="fa-solid fa-trash-can" style="color: #42999B;"></i></a>
                                                 <a href="#"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
                                                 </span>

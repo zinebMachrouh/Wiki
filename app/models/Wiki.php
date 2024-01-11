@@ -47,13 +47,14 @@ class Wiki
         }
     }
 
-    public function Update($wiki)
+    public function Update($title, $content, $category_id, $id)
     {
         try {
-            $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id");
-            $this->conn->bind(':title', $wiki->title);
-            $this->conn->bind(':content', $wiki->content);
-            $this->conn->bind(':category_id', $wiki->category_id);
+            $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id WHERE id = :wiki_id");
+            $this->conn->bind(':title', $title);
+            $this->conn->bind(':content', $content);
+            $this->conn->bind(':category_id', $category_id);
+            $this->conn->bind(':wiki_id', $id);
 
             $this->conn->execute();
         } catch (PDOException $e) {
@@ -79,5 +80,25 @@ class Wiki
         $this->conn->bind(':tag_id', $tag_id);
         $this->conn->execute();
     }
+    public function getWiki($id){
+        $this->conn->query("SELECT DISTINCT * FROM wikis where id = :id");
+        $this->conn->bind(':id', $id);
+        $this->conn->execute();
+        return $this->conn->single();
+    }
+    public function updateTags($wikiId, $tags)
+    {
+        $this->conn->query("DELETE FROM tag_wiki WHERE wiki_id = :id");
+        $this->conn->bind(':id', $wikiId);
 
+        $this->conn->execute();
+
+        foreach ($tags as $tagId) {
+            $this->conn->query("INSERT INTO tag_wiki (wiki_id, tag_id) VALUES (:wiki_id,:tag_id)");
+            $this->conn->bind(':wiki_id', $wikiId);
+            $this->conn->bind(':tag_id', $tagId);
+
+            $this->conn->execute();
+        }
+    }
 }

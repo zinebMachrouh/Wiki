@@ -77,13 +77,13 @@ class User
 
     public function login($email, $password)
     {
-        $this->conn->bind(':email', $email);
 
-        $row = $this->conn->single();
-        if ($row && property_exists($row, 'password')) {
+        $row = $this->getUser($email);
+
+        if ($row) {
+
             if (password_verify($password, $row->password)) {
                 return $row;
-                
             }
         }
 
