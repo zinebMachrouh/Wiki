@@ -123,7 +123,11 @@ class Users extends Controller
             'user' => $this->userModel->getUserById($_SESSION['user_id']),
         ];
 
-        $this->view('users/dashboards/user', $data);
+        if ($data['user']->role === 0) {
+            $this->view('users/dashboards/user', $data);
+        }else{
+            $this->view('users/dashboards/admin', $data);
+        }
     }
 
     public function profile()

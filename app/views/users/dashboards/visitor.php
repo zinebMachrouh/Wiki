@@ -34,20 +34,10 @@
     <article>
         <div class="header">
             <?php
-            if ($_SESSION['auth']) {
-                echo '<div class="header-left">
-                        <div class="row">
-                            <i class="fa-solid fa-circle-user"></i>
-                            <h2>Welcome ' . $data['user']->fname . ' ' . $data['user']->lname . '</h2>
-                        </div>
-                        <p>👋 It\'s time to be creative!</p>
-                    </div>';
-            } else {
                 echo '<div class="header-left">
                         <h2>Welcome Visitor!</h2>
                         <p>👋 It\'s time to be creative!</p>
                     </div>';
-            }
             ?>
             <div class="header-right">
                 <div class="search-bar">
