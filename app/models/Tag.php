@@ -32,4 +32,51 @@ class Tag
         $this->conn->execute();
         return $this->conn->resultSet();
     }
+    public function adminTags()
+    {
+        $this->conn->query(
+            "SELECT t.id, t.title, 
+            COUNT(w.wiki_id) AS Total_Wikis,
+            FROM tags t
+            LEFT JOIN tag_wiki w ON t.id = w.tag_id
+            GROUP BY t.id"
+        );
+        return $this->conn->resultSet();
+    }
+
+    public function Add($newData)
+    {
+        try {
+            $this->conn->query("INSERT INTO tags (title) VALUES(:Title)");
+            $this->conn->bind(':Title', $newData['title']);
+
+            $this->conn->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function Update($newData)
+    {
+        try {
+            $this->conn->query("UPDATE categories SET Title = :Title WHERE id = :id");
+            $this->conn->bind(':id', $newData['id']);
+            $this->conn->bind(':Title', $newData['title']);
+
+            $this->conn->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function Delete($id)
+    {
+        try {
+            $this->conn->query("DELETE FROM tags WHERE id = :id");
+            $this->conn->bind(':id', $id);
+            $this->conn->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

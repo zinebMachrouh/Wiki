@@ -2,9 +2,7 @@
 class Categories extends Controller
 {
     private $userModel;
-    private $wikiModel;
     private $categoryModel;
-    private $tagModel;
 
     public function __construct()
     {

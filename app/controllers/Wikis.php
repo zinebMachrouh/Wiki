@@ -1,14 +1,12 @@
 <?php
 class Wikis extends Controller
 {
-    private $userModel;
     private $wikiModel;
     private $categoryModel;
     private $tagModel;
 
     public function __construct()
     {
-        $this->userModel = $this->model('User');
         $this->wikiModel = $this->model('Wiki');
         $this->categoryModel = $this->model('Category');
         $this->tagModel = $this->model('Tag');

@@ -79,7 +79,6 @@
                                                 </span>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="card-content">
                                         <span>' . ($wiki->category !== null ? $wiki->category : 'Category Not Assigned') . '</span>
