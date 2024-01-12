@@ -48,6 +48,7 @@ class Wikis extends Controller
     {
         $this->wikiModel->Archive($id);
         redirect('users/dashboard');
+        
     }
 
     public function updateForm($id)
