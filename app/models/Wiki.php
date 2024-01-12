@@ -11,13 +11,14 @@ class Wiki
     public function getAll()
     {
         $this->conn->query("SELECT wikis.*, categories.title AS category, users.fname AS fname, users.lname AS lname
-            FROM wikis
-            INNER JOIN categories ON categories.id = wikis.category_id
-            INNER JOIN users ON users.id = wikis.user_id
-            WHERE wikis.removed = 0
-            ORDER BY wikis.created_at DESC");
+        FROM wikis
+        LEFT JOIN categories ON categories.id = wikis.category_id
+        INNER JOIN users ON users.id = wikis.user_id
+        WHERE wikis.removed = 0
+        ORDER BY wikis.created_at DESC");
         return $this->conn->resultSet();
     }
+
 
     public function getWikisByUserId()
     {
@@ -27,7 +28,7 @@ class Wiki
             INNER JOIN users ON users.id = wikis.user_id
             WHERE wikis.removed = 0 AND wikis.user_id = :user_id
             ORDER BY wikis.created_at DESC");
-            $this->conn->bind(':user_id', $_SESSION['user_id']);
+        $this->conn->bind(':user_id', $_SESSION['user_id']);
         return $this->conn->resultSet();
     }
 
@@ -74,6 +75,16 @@ class Wiki
             die($e->getMessage());
         }
     }
+    public function Archive($Wiki_ID)
+    {
+        try {
+            $this->conn->query("UPDATE wikis SET removed = 2 WHERE id = :wiki_id");
+            $this->conn->bind(':wiki_id', $Wiki_ID);
+            $this->conn->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
     public function attachTag($wiki_id, $tag_id)
     {
@@ -82,7 +93,8 @@ class Wiki
         $this->conn->bind(':tag_id', $tag_id);
         $this->conn->execute();
     }
-    public function getWiki($id){
+    public function getWiki($id)
+    {
         $this->conn->query("SELECT DISTINCT * FROM wikis INNER JOIN users ON wikis.user_id = users.id where wikis.id = :id");
         $this->conn->bind(':id', $id);
         $this->conn->execute();
@@ -103,6 +115,4 @@ class Wiki
             $this->conn->execute();
         }
     }
-
-
 }

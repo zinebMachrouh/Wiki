@@ -14,12 +14,6 @@ class Users extends Controller
         $this->tagModel = $this->model('Tag');
     }
 
-    public function getUserModel()
-    {
-        return $this->userModel;
-    }
-
-
     public function index()
     {
         $_SESSION['auth'] = false;

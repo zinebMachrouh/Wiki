@@ -25,7 +25,7 @@
                     <h4>Home</h4>
                 </div>
             </a>
-            <a href="<?php echo URLROOT; ?>/users/profile"><i class="bi bi-bookmarks-fill"></i>
+            <a href="<?php echo URLROOT; ?>/categories/index"><i class="bi bi-bookmarks-fill"></i>
                 <div class="hidden">
                     <h4>Profile</h4>
                 </div>
@@ -70,10 +70,19 @@
                                 <div class="card-body">
                                     <div class="card-header">
                                         <h4>' . $wiki->title . '</h4>
-                                        <a href="' . URLROOT . '/wikis/wikiDetails/' . $wiki->id . '"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                        <div class="dropdown" style="float:right;">
+                                            <button class="dropbtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                            <div class="dropdown-content">
+                                                <span>
+                                                <a href="' . URLROOT . '/wikis/archive/' . $wiki->id . '" ><i class="fa-solid fa-inbox" style="color: #42999B;"></i></a>                                                
+                                                <a href="' . URLROOT . '/wikis/wikiDetails/' . $wiki->id . '"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="card-content">
-                                        <span>' . $wiki->category . '</span>
+                                        <span>' . ($wiki->category !== null ? $wiki->category : 'Category Not Assigned') . '</span>
                                         <p>' . $wiki->content . '</p>
                                     </div>
                                     <div class="card-footer">
