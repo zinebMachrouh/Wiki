@@ -16,3 +16,4 @@ function openmodCat(id, title, description) {
 function closemodCat() {
     document.getElementById('modCatPopup').style.display = 'none';
 }
+

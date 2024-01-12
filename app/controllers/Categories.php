@@ -7,9 +7,7 @@ class Categories extends Controller
     public function __construct()
     {
         $this->userModel = $this->model('User');
-        $this->wikiModel = $this->model('Wiki');
         $this->categoryModel = $this->model('Category');
-        $this->tagModel = $this->model('Tag');
     }
 
     public function index()
@@ -45,9 +43,9 @@ class Categories extends Controller
         redirect('categories/index');
     }
 
-    public function deleteOne($id){
+    public function deleteOne($id)
+    {
         $this->categoryModel->Delete($id);
         redirect('categories/index');
-
     }
 }

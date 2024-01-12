@@ -36,7 +36,7 @@ class Tag
     {
         $this->conn->query(
             "SELECT t.id, t.title, 
-            COUNT(w.wiki_id) AS Total_Wikis,
+            COUNT(w.wiki_id) AS Total_Wikis
             FROM tags t
             LEFT JOIN tag_wiki w ON t.id = w.tag_id
             GROUP BY t.id"

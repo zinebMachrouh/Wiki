@@ -84,4 +84,5 @@ class Wikis extends Controller
         $this->view('wikis/details', $data);
 
     }
+    
 }

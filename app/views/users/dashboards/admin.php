@@ -30,7 +30,7 @@
                     <h4>Profile</h4>
                 </div>
             </a>
-            <a href="<?php echo URLROOT; ?>/wikis/addWiki"><i class="fa-solid fa-hashtag"></i>
+            <a href="<?php echo URLROOT; ?>/tags/index"><i class="fa-solid fa-hashtag"></i>
                 <div class="hidden">
                     <h4>Add Wiki</h4>
                 </div>
@@ -121,7 +121,56 @@
                 </div>
             </div>
         </main>
+        <div class="modal" id="searchPopup">
+            <h2 id="popupTitle"></h2>
+            <p id="popupDescription"></p>
+            <p>Status: <span id="popupStatus"></span></p>
+            <p>Priority: <span id="popupPriority"></span></p>
+            <button onclick="closeSearchModal()">Close</button>
+        </div>
     </article>
+    <script>
+        function handleEnterKey(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchAndDisplay();
+            }
+        }
+
+        function displayPopupWithData(data) {
+            document.getElementById('popupTitle').innerText = data.title;
+            document.getElementById('popupDescription').innerText = data.description;
+            document.getElementById('popupStatus').innerText = data.status;
+            document.getElementById('popupPriority').innerText = data.priority;
+
+            if (data) {
+                document.getElementById('overlay').style.display = 'block';
+                document.getElementById('searchPopup').style.display = 'block';
+
+            }
+        }
+
+        function closeSearchModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('searchPopup').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+        }
+
+        function searchAndDisplay() {
+            var searchTerm = document.getElementById('searchInput').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    displayPopupWithData(data);
+                }
+            };
+            xhr.open('GET', '<?php echo URLROOT; ?>/wikis/searchData/' + searchTerm, true);
+            xhr.send();
+        }
+    </script>
+
 </body>
 
 </html>

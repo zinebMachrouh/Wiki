@@ -80,4 +80,8 @@ class Database
     public function lastInsertId(){
         return $this->conn->lastInsertId();
     }
+
+    public function quote(){
+        
+    }
 }

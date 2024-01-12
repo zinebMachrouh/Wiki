@@ -31,7 +31,7 @@
                     <h4>Profile</h4>
                 </div>
             </a>
-            <a href="<?php echo URLROOT; ?>/wikis/addWiki"><i class="fa-solid fa-hashtag"></i>
+            <a href="<?php echo URLROOT; ?>/tags/index"><i class="fa-solid fa-hashtag"></i>
                 <div class="hidden">
                     <h4>Add Wiki</h4>
                 </div>
