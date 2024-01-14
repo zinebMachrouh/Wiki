@@ -110,17 +110,25 @@ class Users extends Controller
     // Dashboard
     public function dashboard()
     {
-        $data = [
+
+        $dataV= [
             'wikis' => $this->wikiModel->getAll(),
             'categories' => $this->categoryModel->getAll(),
             'tags' => $this->tagModel->getAll(),
-            'user' => $this->userModel->getUserById($_SESSION['user_id']),
+
         ];
 
-        if ($data['user']->role === 0) {
-            $this->view('users/dashboards/user', $data);
+        if ($_SESSION['auth']) {
+            $data = $dataV + [
+                'user' => $this->userModel->getUserById($_SESSION['user_id']),
+            ];
+            if ($data['user']->role === 0) {
+                $this->view('users/dashboards/user', $data);
+            } else {
+                $this->view('users/dashboards/admin', $data);
+            }
         }else{
-            $this->view('users/dashboards/admin', $data);
+            $this->view('users/dashboards/visitor',$dataV);
         }
     }
 

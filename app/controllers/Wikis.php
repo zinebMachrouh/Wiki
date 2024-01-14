@@ -88,5 +88,24 @@ class Wikis extends Controller
         $results =  $this->wikiModel->searchData($param);
         echo json_encode($results);
     }
+    public function setPicture($picture){
+        $valid_extensions = array('jpeg', 'jpg', 'png');
+        $path = APPROOT . "/../public/uploads/";
 
+        $img = $_FILES['picture']['name'];
+        $tmp = $_FILES['picture']['tmp_name'];
+
+        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+
+        $picture = rand(1000, 1000000) . $img;
+
+        if (in_array($ext, $valid_extensions)) {
+            $path = $path . strtolower($picture);
+            if (!move_uploaded_file($tmp, $path)) {
+                $data['picture_err'] = 'Picture upload unsuccessful';
+            }
+        } else {
+            $data['picture_err'] = 'Unsupported extension';
+        }
+    }
 }

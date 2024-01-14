@@ -115,6 +115,72 @@
             </div>
         </main>
     </article>
+    <div class="overlay" id="overlay">
+        <div class="modal" id="searchPopup">
+            <h2 id="popupTitle">Search results</h2>
+            <div id="searchData"></div>
+            <button onclick="closeSearchModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function handleEnterKey(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchAndDisplay();
+            }
+        }
+
+        function displayPopupWithData(dataArray) {
+            var container = document.getElementById('searchData');
+            container.innerHTML = '';
+            dataArray.forEach(function(data) {
+                var url = '<?php echo URLROOT; ?>/wikis/wikiDetails/' + data.id;
+                var row = document.createElement('div');
+                row.classList = 'searchCard'
+
+                row.innerHTML = `
+                    <div class="card-header">
+                        <h4>${data.title}</h4>
+                        <a href="${url}"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
+                    </div>
+                    <div class="card-content">
+                        <span>${data.category !== null ? data.category : 'Category Not Assigned'}</span>
+                        <p>${data.content}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>By ${data.fname} ${data.lname}</span>
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+            document.getElementById('overlay').style.display = 'flex';
+
+            document.getElementById('searchPopup').style.display = 'flex';
+
+        }
+
+        function closeSearchModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('searchPopup').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+        }
+
+        function searchAndDisplay() {
+            var searchTerm = document.getElementById('searchInput').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    displayPopupWithData(data);
+                }
+            };
+            xhr.open('GET', '<?php echo URLROOT; ?>/wikis/searchData/' + searchTerm, true);
+            xhr.send();
+        }
+    </script>
 </body>
 
 </html>
