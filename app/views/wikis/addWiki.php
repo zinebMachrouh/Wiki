@@ -28,7 +28,7 @@
             </label>
             <label for="category">
                 <h4>category</h4>
-                <select name="category" id="category">
+                <select name="category" id="category" required>
                     <option value="" hidden>Pick a Category</option>
                     <?php
                     foreach ($data['categories'] as $cat) {
@@ -42,7 +42,7 @@
                 <div class="addTags">
                     <?php
                     foreach ($data['tags'] as $tag) {
-                        echo '<label class="tag" for="' . $tag->id . '"><input type="checkbox" name="tag[]" id="' . $tag->id . '" value="'. $tag->id.'">' . $tag->title . '</label>';
+                        echo '<label class="tag" for="' . $tag->id . '"><input type="checkbox" name="tag[]" id="' . $tag->id . '" value="' . $tag->id . '">' . $tag->title . '</label>';
                     }
                     ?>
                 </div>
@@ -54,5 +54,27 @@
         </form>
     </div>
 </body>
+<script>
+    var titleRegex = /^[a-zA-Z0-9\s]{1,100}$/;
+    var contentRegex = /^[a-zA-Z0-9\s]{1,}$/;
+    var categoryRegex = /^[1-9][0-9]*$/;
+
+    document.getElementById('form').addEventListener('submit', function(event) {
+
+        var titleInput = document.getElementById('title').value;
+        if (!titleRegex.test(titleInput)) {
+            console.log('Invalid title. Please enter a valid title.');
+        }
+        var contentInput = document.getElementById('content').value;
+        if (!contentRegex.test(contentInput)) {
+            console.log('Invalid content. Please enter valid content.');
+        }
+
+        var categoryInput = document.getElementById('category').value;
+        if (!categoryRegex.test(categoryInput)) {
+            console.log('Invalid category. Please pick a valid category.');
+        }
+    });
+</script>
 
 </html>

@@ -59,7 +59,7 @@ class Tag
     public function Update($newData)
     {
         try {
-            $this->conn->query("UPDATE categories SET Title = :Title WHERE id = :id");
+            $this->conn->query("UPDATE tags SET Title = :Title WHERE id = :id");
             $this->conn->bind(':id', $newData['id']);
             $this->conn->bind(':Title', $newData['title']);
 

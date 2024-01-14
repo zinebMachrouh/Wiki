@@ -60,7 +60,7 @@
             </div>
         </div>
         <main class="main-categories">
-            <h2>All Categories</h2>
+            <h2>All Tags</h2>
             <div class="allCategories">
                 <?php
                 foreach ($data['tags'] as $category) {
@@ -71,7 +71,7 @@
                                             <button class="dropbtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                                             <div class="dropdown-content">
                                                 <span>
-                                                <a href="#" onclick="openmodCat(' . $category->id . ', \'' . $category->title . '\')"><i class="fa-solid fa-pencil" style="color: #42999B;"></i></a>                                                
+                                                <a href="#" onclick="openmodTag(' . $category->id . ', \'' . $category->title . '\')"><i class="fa-solid fa-pencil" style="color: #42999B;"></i></a>                                                
                                                 <a href="' . URLROOT . '/tags/deleteOne/' . $category->id . '"><i class="fa-solid fa-trash-can" style="color: #42999B;"></i></a>
                                                 </span>
                                             </div>
@@ -89,17 +89,13 @@
     <div id="catPopup" class="popup">
         <div class="popup-content">
             <div class="popup-header">
-                <h2>Add Category</h2>
+                <h2>Add Tag</h2>
                 <span class="close" onclick="closecatPopup()">&times;</span>
             </div>
             <div class="popup-body">
-                <form action="<?php echo URLROOT; ?>/tags/addOne" method="post">
-                    <label for="title" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Title:</label><br>
-                    <input type="text" id="title" name="title" required placeholder="Enter Category Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
-
-                    <label for="description" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Description:</label><br>
-                    <textarea id="description" name="description" required placeholder="Tell us about your category <3" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px; resize:none;"></textarea> <br>
-
+                <form id="form" action="<?php echo URLROOT; ?>/tags/addOne" method="post">
+                    <label for="title" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Tag Title:</label><br>
+                    <input type="text" id="title" name="title" pattern="[a-zA-Z0-9\s]+$" required placeholder="Enter Tag Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
                     <div class="popup-footer">
                         <button type="submit" class="btn btn-primary" name="setTeam">Submit</button>
                     </div>
@@ -107,19 +103,19 @@
             </div>
         </div>
     </div>
-    <div id="modCatPopup" class="popup">
+    <div id="modTag" class="popup">
         <div class="popup-content">
             <div class="popup-header">
-                <h2>Modify Category</h2>
+                <h2>Modify Tag</h2>
                 <span class="close" onclick="closemodCat()">&times;</span>
             </div>
             <div class="popup-body">
-                <form action="<?php echo URLROOT; ?>/modifyOne/modifyOne" method="post">
-                    <label for="id" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Id:</label><br>
-                    <input type="text" id="id" name="id" required placeholder="Category Id" readonly style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
+                <form id="M-form" action="<?php echo URLROOT; ?>/tags/modifyOne" method="post">
+                    <label for="id" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Tag Id:</label><br>
+                    <input type="text" id="id" name="id" required placeholder="Tag Id" readonly style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
 
-                    <label for="modTitle" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Title:</label><br>
-                    <input type="text" id="modTitle" name="modTitle" required placeholder="Enter Category Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
+                    <label for="modTitle" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Tag Title:</label><br>
+                    <input type="text" id="modTitle" pattern="[a-zA-Z0-9\s]+$" name="modTitle" required placeholder="Enter Tag Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
 
                     <div class="popup-footer">
                         <button type="submit" class="btn btn-primary" name="setTeam">Submit</button>
@@ -137,6 +133,27 @@
     </div>
 
     <script>
+        var titleRegex = /^[a-zA-Z0-9\s]+$/;
+
+        document.getElementById('form').addEventListener('submit', function(event) {
+            var titleInput = document.getElementById('title');
+
+            if (!titleRegex.test(titleInput.value)) {
+                alert('Invalid Category Title. Please use alphanumeric characters and spaces.');
+                event.preventDefault();
+            }
+
+        });
+        document.getElementById('M-form').addEventListener('submit', function(event) {
+            var titleInput = document.getElementById('modTitle');
+
+            if (!titleRegex.test(titleInput.value)) {
+                alert('Invalid Category Title. Please use alphanumeric characters and spaces.');
+                event.preventDefault();
+            }
+
+        });
+
         function handleEnterKey(event) {
             if (event.key === "Enter") {
                 event.preventDefault();

@@ -38,11 +38,14 @@ class Category
     }
     public function Add($newData)
     {
+        $titleRegex = '/^[a-zA-Z0-9\s]+$/';
+        $descriptionRegex = '/^[a-zA-Z0-9\s\W]+$/';
         try {
-            $this->conn->query("INSERT INTO categories (title, description) VALUES(:Title, :Description)");
-            $this->conn->bind(':Title', $newData['title']);
-            $this->conn->bind(':Description', $newData['description']);
-
+            if (preg_match($titleRegex, $newData['title']) && preg_match($descriptionRegex, $newData['description'])) {
+                $this->conn->query("INSERT INTO categories (title, description) VALUES(:Title, :Description)");
+                $this->conn->bind(':Title', $newData['title']);
+                $this->conn->bind(':Description', $newData['description']);
+            }
             $this->conn->execute();
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -51,15 +54,21 @@ class Category
 
     public function Update($newData)
     {
-        try {
-            $this->conn->query("UPDATE categories SET Title = :Title, Description = :Description, created_at = :created_at WHERE id = :id");
-            $this->conn->bind(':id', $newData['id']);
-            $this->conn->bind(':Title', $newData['title']);
-            $this->conn->bind(':Description', $newData['description']);
-            $current = new DateTime('now');
-            $this->conn->bind(':created_at', $current->format('Y-m-d H:i:s'));
+        $titleRegex = '/^[a-zA-Z0-9\s]+$/';
+        $descriptionRegex = '/^[a-zA-Z0-9\s\W]+$/';
 
-            $this->conn->execute();
+        try {
+            if (preg_match($titleRegex, $newData['title']) && preg_match($descriptionRegex, $newData['description'])) {
+
+                $this->conn->query("UPDATE categories SET Title = :Title, Description = :Description, created_at = :created_at WHERE id = :id");
+                $this->conn->bind(':id', $newData['id']);
+                $this->conn->bind(':Title', $newData['title']);
+                $this->conn->bind(':Description', $newData['description']);
+                $current = new DateTime('now');
+                $this->conn->bind(':created_at', $current->format('Y-m-d H:i:s'));
+
+                $this->conn->execute();
+            }
         } catch (PDOException $e) {
             die($e->getMessage());
         }

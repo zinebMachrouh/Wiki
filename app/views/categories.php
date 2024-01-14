@@ -95,7 +95,7 @@
                 <span class="close" onclick="closecatPopup()">&times;</span>
             </div>
             <div class="popup-body">
-                <form action="<?php echo URLROOT; ?>/categories/addOne" method="post">
+                <form id="form" action="<?php echo URLROOT; ?>/categories/addOne" method="post">
                     <label for="title" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Title:</label><br>
                     <input type="text" id="title" name="title" required placeholder="Enter Category Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
 
@@ -116,15 +116,15 @@
                 <span class="close" onclick="closemodCat()">&times;</span>
             </div>
             <div class="popup-body">
-                <form action="<?php echo URLROOT; ?>/categories/modifyOne" method="post">
+                <form id="M-form" action="<?php echo URLROOT; ?>/categories/modifyOne" method="post">
                     <label for="id" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Id:</label><br>
                     <input type="text" id="id" name="id" required placeholder="Category Id" readonly style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
 
                     <label for="modTitle" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Title:</label><br>
-                    <input type="text" id="modTitle" name="modTitle" required placeholder="Enter Category Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
+                    <input type="text" id="modTitle" pattern="[a-zA-Z0-9\s]+$" name="modTitle" required placeholder="Enter Category Name" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px;"> <br>
 
                     <label for="modDescription" style="color: #006d77ff; font-size: 16px; font-weight: 600;">Category Description:</label><br>
-                    <textarea id="modDescription" name="modDescription" required placeholder="Tell us about your category <3" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px; resize:none;"></textarea> <br>
+                    <textarea id="modDescription" pattern="[a-zA-Z0-9\s\W]+$" name="modDescription" required placeholder="Tell us about your category <3" style="width: 100%; padding: 10px 7px; font-size: 16px; border-radius: 5px; outline: none; border: #1e1e1e4c 1px solid; margin-bottom: 15px; resize:none;"></textarea> <br>
 
                     <div class="popup-footer">
                         <button type="submit" class="btn btn-primary" name="setTeam">Submit</button>
@@ -142,6 +142,38 @@
     </div>
 
     <script>
+        var titleRegex = /^[a-zA-Z0-9\s]+$/;
+
+        var descriptionRegex = /^[a-zA-Z0-9\s\W]+$/;
+        document.getElementById('form').addEventListener('submit', function(event) {
+            var titleInput = document.getElementById('title');
+            var descriptionInput = document.getElementById('description');
+
+            if (!titleRegex.test(titleInput.value)) {
+                alert('Invalid Category Title. Please use alphanumeric characters and spaces.');
+                event.preventDefault();
+            }
+
+            if (!descriptionRegex.test(descriptionInput.value)) {
+                alert('Invalid Category Description. Please use alphanumeric characters, spaces, and special characters.');
+                event.preventDefault();
+            }
+        });
+        document.getElementById('M-form').addEventListener('submit', function(event) {
+            var titleInput = document.getElementById('modTitle');
+            var descriptionInput = document.getElementById('modDescription');
+
+            if (!titleRegex.test(titleInput.value)) {
+                alert('Invalid Category Title. Please use alphanumeric characters and spaces.');
+                event.preventDefault();
+            }
+
+            if (!descriptionRegex.test(descriptionInput.value)) {
+                alert('Invalid Category Description. Please use alphanumeric characters, spaces, and special characters.');
+                event.preventDefault();
+            }
+        });
+
         function handleEnterKey(event) {
             if (event.key === "Enter") {
                 event.preventDefault();

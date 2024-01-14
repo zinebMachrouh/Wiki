@@ -34,15 +34,21 @@ class Wiki
 
     public function Add($wiki)
     {
-        try {
-            $this->conn->query("INSERT INTO Wikis(title, content, user_id, category_id) VALUES( :title, :content, :user_id ,:category_id)");
-            $this->conn->bind(':title', $wiki['title']);
-            $this->conn->bind(':content', $wiki['content']);
-            $this->conn->bind(':user_id', $_SESSION['user_id']);
-            $this->conn->bind(':category_id', $wiki['category_id']);
+        $titleRegex = '/^[a-zA-Z0-9\s]{1,100}$/';
+        $contentRegex = '/^[a-zA-Z0-9\s]{1,}$/';
+        $categoryRegex = '/^[1-9][0-9]*$/';
 
-            $this->conn->execute();
-            return $this->conn->lastInsertId();
+        try {
+            if (preg_match($contentRegex, $wiki['content']) && preg_match($titleRegex, $wiki['title']) && preg_match($categoryRegex, $wiki['category_id'])) {
+                $this->conn->query("INSERT INTO Wikis(title, content, user_id, category_id) VALUES( :title, :content, :user_id ,:category_id)");
+                $this->conn->bind(':title', $wiki['title']);
+                $this->conn->bind(':content', $wiki['content']);
+                $this->conn->bind(':user_id', $_SESSION['user_id']);
+                $this->conn->bind(':category_id', $wiki['category_id']);
+
+                $this->conn->execute();
+                return $this->conn->lastInsertId();
+            }
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -50,16 +56,22 @@ class Wiki
 
     public function Update($title, $content, $category_id, $id)
     {
-        try {
-            $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id, created_at = :created_at WHERE id = :wiki_id");
-            $this->conn->bind(':title', $title);
-            $this->conn->bind(':content', $content);
-            $this->conn->bind(':category_id', $category_id);
-            $this->conn->bind(':wiki_id', $id);
-            $current = new DateTime('now');
-            $this->conn->bind(':created_at', $current->format('Y-m-d H:i:s'));
+        $titleRegex = '/^[a-zA-Z0-9\s]{1,100}$/';
+        $contentRegex = '/^[a-zA-Z0-9\s]{1,}$/';
+        $categoryRegex = '/^[1-9][0-9]*$/';
 
-            $this->conn->execute();
+        try {
+            if (preg_match($contentRegex, $content) && preg_match($titleRegex, $title) && preg_match($categoryRegex, $category_id)) {
+                $this->conn->query("UPDATE wikis SET title = :title, content = :content, category_id = :category_id, created_at = :created_at WHERE id = :wiki_id");
+                $this->conn->bind(':title', $title);
+                $this->conn->bind(':content', $content);
+                $this->conn->bind(':category_id', $category_id);
+                $this->conn->bind(':wiki_id', $id);
+                $current = new DateTime('now');
+                $this->conn->bind(':created_at', $current->format('Y-m-d H:i:s'));
+
+                $this->conn->execute();
+            }
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -95,7 +107,7 @@ class Wiki
     }
     public function getWiki($id)
     {
-        $this->conn->query("SELECT DISTINCT * FROM wikis INNER JOIN users ON wikis.user_id = users.id where wikis.id = :id");
+        $this->conn->query("SELECT DISTINCT wikis.* FROM wikis INNER JOIN users ON wikis.user_id = users.id where wikis.id = :id");
         $this->conn->bind(':id', $id);
         $this->conn->execute();
         return $this->conn->single();

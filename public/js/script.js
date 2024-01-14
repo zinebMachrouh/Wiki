@@ -12,6 +12,11 @@ function openmodCat(id, title, description) {
     document.getElementById('modDescription').value = description;
     document.getElementById('modCatPopup').style.display = 'flex';
 }
+function openmodTag(id, title, description) {
+    document.getElementById('id').value = id;
+    document.getElementById('modTitle').value = title;
+    document.getElementById('modTag').style.display = 'flex';
+}
 
 function closemodCat() {
     document.getElementById('modCatPopup').style.display = 'none';

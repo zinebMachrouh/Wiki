@@ -939,7 +939,13 @@ select {
 }
 @media screen and (max-width: 1300px) {
 
-
+.left{
+    display: none;
+}
+.right{
+    width: 100%;
+    padding: 20px;
+}
     .card {
         width: 100%;
     }

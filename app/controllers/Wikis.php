@@ -59,6 +59,7 @@ class Wikis extends Controller
         ];
         $this->view('wikis/modifyWiki', $data);
     }
+
     public function modifyData($id){
         $data = [
             'title' => trim($_POST['title']),

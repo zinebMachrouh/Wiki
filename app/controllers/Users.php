@@ -96,7 +96,7 @@ class Users extends Controller
     {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
-        $_SESSION['auth'] = true;
+        $_SESSION['auth'] = 1;
     }
 
     public function logout()
