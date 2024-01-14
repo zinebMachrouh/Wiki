@@ -51,6 +51,40 @@
             <p class="log">Alreadt Have an account? <a href="<?php echo URLROOT; ?>/users/loginPage">LogIn</a></p>
         </div>
     </div>
+    <script>
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function(event) {
+            const firstNameInput = document.getElementById('fname');
+            const lastNameInput = document.getElementById('lname');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            const nameRegex = /^[a-zA-Z]+$/;
+            const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z]+\.[a-z]{2,}$/;
+            const passwordRegex = /^[A-Za-z\d]{8,}$/;
+
+            if (!nameRegex.test(firstNameInput.value)) {
+                alert('Invalid First Name format');
+                event.preventDefault();
+            }
+
+            if (!nameRegex.test(lastNameInput.value)) {
+                alert('Invalid Last Name format');
+                event.preventDefault();
+            }
+
+            if (!emailRegex.test(emailInput.value)) {
+                alert('Invalid email format');
+                event.preventDefault();
+            }
+
+            if (!passwordRegex.test(passwordInput.value)) {
+                alert('Password must be at least 8 characters');
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

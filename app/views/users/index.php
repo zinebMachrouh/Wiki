@@ -42,6 +42,27 @@
 
         </div>
     </div>
+    <script>
+        const emailRegex = /^[a-zA-Z0-9.-_]+@[a-zA-Z]+\.[a-z]{2,}$/;
+        const passwordRegex = /^[A-Za-z\d]{8,}$/;
+
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function(event) {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            if (!emailRegex.test(emailInput.value)) {
+                alert('Invalid email format');
+                event.preventDefault();
+            }
+
+            if (!passwordRegex.test(passwordInput.value)) {
+                alert('Password must be at least 8 characters');
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>
