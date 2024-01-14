@@ -81,7 +81,7 @@ class Database
         return $this->conn->lastInsertId();
     }
 
-    public function quote(){
-        
+    public function quote($param){
+        return $this->stmt->quote($param);
     }
 }

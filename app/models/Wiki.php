@@ -115,19 +115,23 @@ class Wiki
             $this->conn->execute();
         }
     }
-    public function searchData($searchInput){
-        $searchInput = '%' . mysqli_real_escape_string($this->conn, $searchInput) . '%'; 
+    public function searchData($searchInput)
+    {
+        $searchInput = '%' . $searchInput . '%';
+        $tagInput = '%' . $searchInput;
 
-        $query = "SELECT w.*
-        FROM wikis w
-        LEFT JOIN categories c ON w.category_id = c.category_id
-        LEFT JOIN tags t ON w.tag_id = t.tag_id
-        WHERE w.title LIKE :searchInput OR c.category_title LIKE :searchInput OR t.tag_title LIKE :searchInput
-    ";
+        $query = "SELECT DISTINCT w.*, c.title
+                FROM wikis w
+                LEFT JOIN categories c ON w.category_id = c.id
+                LEFT JOIN tag_wiki tw ON tw.wiki_id = w.id
+                LEFT JOIN tags t ON tw.tag_id = t.id
+                WHERE w.title LIKE :searchInput OR c.title LIKE :searchInput OR t.title LIKE :tagInput
+            ";
 
         $this->conn->query($query);
         $this->conn->bind(':searchInput', $searchInput);
+        $this->conn->bind(':tagInput', $tagInput);
         $this->conn->execute();
-        $this->conn->resultSet();
+        return $this->conn->resultSet();
     }
 }

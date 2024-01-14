@@ -2,7 +2,6 @@
 class Tags extends Controller
 {
     private $userModel;
-    private $categoryModel;
     private $tagModel;
 
     public function __construct()

@@ -84,5 +84,9 @@ class Wikis extends Controller
         $this->view('wikis/details', $data);
 
     }
-    
+    public function searchData($param){
+        $results =  $this->wikiModel->searchData($param);
+        echo json_encode($results);
+    }
+
 }

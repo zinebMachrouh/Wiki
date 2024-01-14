@@ -121,14 +121,14 @@
                 </div>
             </div>
         </main>
-        <div class="modal" id="searchPopup">
-            <h2 id="popupTitle"></h2>
-            <p id="popupDescription"></p>
-            <p>Status: <span id="popupStatus"></span></p>
-            <p>Priority: <span id="popupPriority"></span></p>
-            <button onclick="closeSearchModal()">Close</button>
-        </div>
     </article>
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="searchPopup">
+        <h2 id="popupTitle">Search results</h2>
+        <div id="searchData"></div>
+        <button onclick="closeSearchModal()">Close</button>
+    </div>
+
     <script>
         function handleEnterKey(event) {
             if (event.key === "Enter") {
@@ -137,17 +137,22 @@
             }
         }
 
-        function displayPopupWithData(data) {
-            document.getElementById('popupTitle').innerText = data.title;
-            document.getElementById('popupDescription').innerText = data.description;
-            document.getElementById('popupStatus').innerText = data.status;
-            document.getElementById('popupPriority').innerText = data.priority;
+        function displayPopupWithData(dataArray) {
+            dataArray.forEach(function(data) {
+                var row = document.createElement('div');
 
-            if (data) {
-                document.getElementById('overlay').style.display = 'block';
-                document.getElementById('searchPopup').style.display = 'block';
+                row.innerHTML = `
+                    <span>i love u</span>
+                    <h2>${data.title}</h2>
+                    <p>${data.content}</p>
+                `;
 
-            }
+                document.getElementById('searchData').appendChild(row);
+            });
+            document.getElementById('overlay').style.display = 'block';
+
+            document.getElementById('searchPopup').style.display = 'block';
+
         }
 
         function closeSearchModal() {
