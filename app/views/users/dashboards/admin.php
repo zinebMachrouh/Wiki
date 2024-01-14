@@ -122,11 +122,12 @@
             </div>
         </main>
     </article>
-    <div class="overlay" id="overlay"></div>
-    <div class="modal" id="searchPopup">
-        <h2 id="popupTitle">Search results</h2>
-        <div id="searchData"></div>
-        <button onclick="closeSearchModal()">Close</button>
+    <div class="overlay" id="overlay">
+        <div class="modal" id="searchPopup">
+            <h2 id="popupTitle">Search results</h2>
+            <div id="searchData"></div>
+            <button onclick="closeSearchModal()">Close</button>
+        </div>
     </div>
 
     <script>
@@ -138,20 +139,32 @@
         }
 
         function displayPopupWithData(dataArray) {
+            var container = document.getElementById('searchData');
+            container.innerHTML = '';
             dataArray.forEach(function(data) {
+                var url = '<?php echo URLROOT; ?>/wikis/wikiDetails/'+data.id;
                 var row = document.createElement('div');
+                row.classList = 'searchCard'
 
                 row.innerHTML = `
-                    <span>i love u</span>
-                    <h2>${data.title}</h2>
-                    <p>${data.content}</p>
+                    <div class="card-header">
+                        <h4>${data.title}</h4>
+                        <a href="${url}"><i class="fa-solid fa-arrow-up-right-from-square" style="color: #42999B;"></i></a>
+                    </div>
+                    <div class="card-content">
+                        <span>${data.category !== null ? data.category : 'Category Not Assigned'}</span>
+                        <p>${data.content}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>By ${data.fname} ${data.lname}</span>
+                    </div>
                 `;
 
-                document.getElementById('searchData').appendChild(row);
+                container.appendChild(row);
             });
-            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('overlay').style.display = 'flex';
 
-            document.getElementById('searchPopup').style.display = 'block';
+            document.getElementById('searchPopup').style.display = 'flex';
 
         }
 

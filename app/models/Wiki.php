@@ -120,12 +120,14 @@ class Wiki
         $searchInput = '%' . $searchInput . '%';
         $tagInput = '%' . $searchInput;
 
-        $query = "SELECT DISTINCT w.*, c.title
+        $query = "SELECT DISTINCT w.*, c.title as category, u.fname as fname, u.lname as lname
                 FROM wikis w
+                INNER JOIN users u on u.id = w.user_id
                 LEFT JOIN categories c ON w.category_id = c.id
                 LEFT JOIN tag_wiki tw ON tw.wiki_id = w.id
                 LEFT JOIN tags t ON tw.tag_id = t.id
                 WHERE w.title LIKE :searchInput OR c.title LIKE :searchInput OR t.title LIKE :tagInput
+                ORDER BY w.created_at DESC
             ";
 
         $this->conn->query($query);
